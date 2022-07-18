@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_with_bloc_pattern/common/hive_database.dart';
+import 'package:todo_with_bloc_pattern/data/repo/repository.dart';
+import 'package:todo_with_bloc_pattern/data/source/hive_task_source.dart';
+import 'package:todo_with_bloc_pattern/ui/home/home.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  await initHive();
+  runApp(ChangeNotifierProvider(
+      create: (context) => Repository(HiveTaskDataSource(box)),
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -13,29 +21,12 @@ class MyApp extends StatelessWidget {
       title: 'ToDo App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        inputDecorationTheme: const InputDecorationTheme(
+          floatingLabelBehavior: FloatingLabelBehavior.never,
+          border: InputBorder.none,
+        ),
       ),
-      home: const HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('ToDo App'),
-      ),
-      body: const Center(
-        child: Text('Empty page'),
-      ),
+      home: HomeScreen(),
     );
   }
 }
