@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../data/model/todo_task.dart';
+import 'widgets/task_listview_widget.dart';
+import 'widgets/todo_appbar_widget.dart';
+
 class ToDoHomeScreen extends StatefulWidget {
   const ToDoHomeScreen({Key? key}) : super(key: key);
 
@@ -8,15 +12,17 @@ class ToDoHomeScreen extends StatefulWidget {
 }
 
 class _ToDoHomeScreenState extends State<ToDoHomeScreen> {
+  List<ToDoTask> tasks = ToDoTask.getMockTasks();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('ToDo App'),
-      ),
-      body: const Center(
-        child: Text('Empty page'),
-      ),
+      appBar: const ToDoAppBarWidget(),
+      body: SingleChildScrollView(
+          child: Column(
+        children: [
+          TaskListViewWidget(tasks: tasks),
+        ],
+      )),
     );
   }
 }
