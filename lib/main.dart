@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo_with_bloc_pattern/foundation/constants/routes.dart';
+import 'package:todo_with_bloc_pattern/foundation/router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,31 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ToDo App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('ToDo App'),
-      ),
-      body: const Center(
-        child: Text('Empty page'),
-      ),
+      routes: ToDoRouter.routes,
+      initialRoute: ToDoRoutes.todoHomeScreen,
     );
   }
 }
