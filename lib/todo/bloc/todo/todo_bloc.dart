@@ -50,11 +50,13 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> with HydratedMixin {
         emit(state.copyWith(tasks: _tasks));
       },
     );
-    
+
     on<MarkTaskEvent>(
       (event, emit) {
         List<ToDoTask> _tasks = state.tasks;
-        int _itemIndex = _tasks.indexOf(event.task);
+        // int _itemIndex = _tasks.indexOf(event.task);
+        int _itemIndex = _tasks
+            .indexOf(_tasks.where((element) => (element == event.task)).first);
         _tasks[_itemIndex] =
             _tasks[_itemIndex].copyWith(isDone: !_tasks[_itemIndex].isDone);
         emit(state.copyWith(tasks: _tasks));

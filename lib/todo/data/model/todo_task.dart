@@ -9,12 +9,14 @@ class ToDoTask extends Equatable {
   final String? description;
   final TaskTag? tag;
   final bool isDone;
+  final DateTime? time;
 
   const ToDoTask({
     required this.title,
     this.description,
     this.tag,
     this.isDone = false,
+    this.time,
   });
 
   // static List<ToDoTask> getMockTasks() {
@@ -43,7 +45,7 @@ class ToDoTask extends Equatable {
   // }
 
   @override
-  List<Object?> get props => [title, description, tag];
+  List<Object?> get props => [title, description, tag, time];
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -71,7 +73,7 @@ class ToDoTask extends Equatable {
 
   @override
   String toString() {
-    return 'ToDoTask(title: $title, description: $description, tag: $tag, isDone: $isDone)';
+    return 'ToDoTask(title: $title, description: $description, tag: $tag, isDone: $isDone, time: ${time.toString()})';
   }
 
   ToDoTask copyWith({
@@ -79,12 +81,14 @@ class ToDoTask extends Equatable {
     String? description,
     TaskTag? tag,
     bool? isDone,
+    DateTime? time,
   }) {
     return ToDoTask(
       title: title ?? this.title,
       description: description ?? this.description,
       tag: tag ?? this.tag,
       isDone: isDone ?? this.isDone,
+      time: time ?? this.time,
     );
   }
 }

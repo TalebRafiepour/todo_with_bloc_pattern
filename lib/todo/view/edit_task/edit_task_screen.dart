@@ -35,9 +35,11 @@ class EditTaskScreenState extends State<EditTaskScreen> with ValidatorMixin {
   void _editTask() {
     if (_formKey.currentState!.validate()) {
       ToDoTask _newTask = ToDoTask(
-          title: _titleController.text,
-          description: _descriptionController.text,
-          tag: _tag);
+        title: _titleController.text,
+        description: _descriptionController.text,
+        tag: _tag,
+        time: widget.task.time, // Time shouldn't change!
+      );
       context
           .read<TodoBloc>()
           .add(EditTaskEvent(oldTask: widget.task, newTask: _newTask));

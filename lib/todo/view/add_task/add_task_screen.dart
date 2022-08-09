@@ -6,8 +6,8 @@ import 'package:todo_with_bloc_pattern/foundation/mixins/validator_mixin.dart';
 import '../../bloc/todo/todo_bloc.dart';
 import '../../data/model/enums/task_tag.dart';
 import '../../data/model/todo_task.dart';
-import '../widgets/todo_appbar_widget.dart';
 import '../widgets/tag_selector_widget.dart';
+import '../widgets/todo_appbar_widget.dart';
 
 class AddTaskScreen extends StatefulWidget {
   const AddTaskScreen({Key? key}) : super(key: key);
@@ -26,9 +26,11 @@ class _AddTaskScreenState extends State<AddTaskScreen> with ValidatorMixin {
   void _addTask() {
     if (_formKey.currentState!.validate()) {
       ToDoTask _task = ToDoTask(
-          title: _titleController.text,
-          description: _descriptionController.text,
-          tag: _tag);
+        title: _titleController.text,
+        description: _descriptionController.text,
+        tag: _tag,
+        time: DateTime.now(),
+      );
       context.read<TodoBloc>().add(AddTodoItemEvent(task: _task));
       Navigator.pop(context);
     }
