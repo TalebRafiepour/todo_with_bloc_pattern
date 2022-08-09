@@ -17,35 +17,35 @@ class ToDoTask extends Equatable {
     this.isDone = false,
   });
 
-  static List<ToDoTask> getMockTasks() {
-    return [
-      const ToDoTask(
-        title: 'Task 1',
-        description: 'Description 1',
-        tag: TaskTag.work,
-      ),
-      const ToDoTask(
-        title: 'Task 2',
-        description: 'Description 2',
-        tag: TaskTag.mundane,
-      ),
-      const ToDoTask(
-        title: 'Task 3',
-        description: 'Description 3',
-        tag: TaskTag.work,
-      ),
-      const ToDoTask(
-        title: 'Task 4',
-        description: 'Description 4',
-        tag: TaskTag.study,
-      ),
-    ];
-  }
+  // static List<ToDoTask> getMockTasks() {
+  //   return [
+  //     const ToDoTask(
+  //       title: 'Task 1',
+  //       description: 'Description 1',
+  //       tag: TaskTag.work,
+  //     ),
+  //     const ToDoTask(
+  //       title: 'Task 2',
+  //       description: 'Description 2',
+  //       tag: TaskTag.mundane,
+  //     ),
+  //     const ToDoTask(
+  //       title: 'Task 3',
+  //       description: 'Description 3',
+  //       tag: TaskTag.work,
+  //     ),
+  //     const ToDoTask(
+  //       title: 'Task 4',
+  //       description: 'Description 4',
+  //       tag: TaskTag.study,
+  //     ),
+  //   ];
+  // }
 
   @override
   List<Object?> get props => [title, description, tag];
 
-    Map<String, dynamic> toMap() {
+  Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'title': title,
       'description': description,

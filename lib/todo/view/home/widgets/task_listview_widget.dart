@@ -9,10 +9,8 @@ import 'task_item_widget.dart';
 class TaskListViewWidget extends StatelessWidget {
   const TaskListViewWidget({
     Key? key,
-    required this.tasks,
   }) : super(key: key);
 
-  final List<ToDoTask> tasks;
 
   @override
   Widget build(BuildContext context) {
