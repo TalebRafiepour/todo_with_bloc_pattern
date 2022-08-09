@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:todo_with_bloc_pattern/foundation/mixins/validator_mixin.dart';
 
+import '../../bloc/todo/todo_bloc.dart';
 import '../../data/model/enums/task_tag.dart';
+import '../../data/model/todo_task.dart';
 import '../widgets/todo_appbar_widget.dart';
 import 'widgets/tag_selector_widget.dart';
 
@@ -21,8 +24,14 @@ class _AddTaskScreenState extends State<AddTaskScreen> with ValidatorMixin {
   TaskTag? _tag;
 
   void _addTask() {
-    _formKey.currentState!.validate();
-    // TODO: Add Functionality.
+    if (_formKey.currentState!.validate()) {
+      ToDoTask _task = ToDoTask(
+          title: _titleController.text,
+          description: _descriptionController.text,
+          tag: _tag);
+      context.read<TodoBloc>().add(AddTodoItemEvent(task: _task));
+      Navigator.pop(context);
+    }
   }
 
   @override
