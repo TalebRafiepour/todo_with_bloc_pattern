@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_with_bloc_pattern/todo/view/home/widgets/filter_widget.dart';
 
 import '../../../bloc/todo/todo_bloc.dart';
 import '../../../bloc/todo/todo_state.dart';
@@ -18,13 +19,18 @@ class TaskListViewWidget extends StatelessWidget {
         if (state.tasks.isEmpty) {
           return const NoTaskIndicatorWidget();
         }
-        return ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: state.tasks.length,
-            itemBuilder: (context, index) {
-              return TaskItemWidget(task: state.tasks[index]);
-            });
+        return Column(
+          children: [
+            const FilterWidget(),
+            ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: state.tasks.length,
+                itemBuilder: (context, index) {
+                  return TaskItemWidget(task: state.tasks[index]);
+                }),
+          ],
+        );
       },
     );
   }
