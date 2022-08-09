@@ -73,4 +73,18 @@ class ToDoTask extends Equatable {
   String toString() {
     return 'ToDoTask(title: $title, description: $description, tag: $tag, isDone: $isDone)';
   }
+
+  ToDoTask copyWith({
+    String? title,
+    String? description,
+    TaskTag? tag,
+    bool? isDone,
+  }) {
+    return ToDoTask(
+      title: title ?? this.title,
+      description: description ?? this.description,
+      tag: tag ?? this.tag,
+      isDone: isDone ?? this.isDone,
+    );
+  }
 }

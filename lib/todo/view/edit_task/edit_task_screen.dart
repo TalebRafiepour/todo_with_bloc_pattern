@@ -34,35 +34,27 @@ class EditTaskScreenState extends State<EditTaskScreen> with ValidatorMixin {
 
   void _editTask() {
     if (_formKey.currentState!.validate()) {
-      ToDoTask _task = ToDoTask(
+      ToDoTask _newTask = ToDoTask(
           title: _titleController.text,
           description: _descriptionController.text,
           tag: _tag);
-      context.read<TodoBloc>().add(AddTodoItemEvent(task: _task));
+      context
+          .read<TodoBloc>()
+          .add(EditTaskEvent(oldTask: widget.task, newTask: _newTask));
       Navigator.pop(context);
     }
   }
 
   void _removeTask() {
     if (_formKey.currentState!.validate()) {
-      ToDoTask _task = ToDoTask(
-          title: _titleController.text,
-          description: _descriptionController.text,
-          tag: _tag);
-      context.read<TodoBloc>().add(AddTodoItemEvent(task: _task));
+      context.read<TodoBloc>().add(RemoveTaskEvent(task: widget.task));
       Navigator.pop(context);
     }
   }
 
   void _markAsDone() {
-    if (_formKey.currentState!.validate()) {
-      ToDoTask _task = ToDoTask(
-          title: _titleController.text,
-          description: _descriptionController.text,
-          tag: _tag);
-      context.read<TodoBloc>().add(AddTodoItemEvent(task: _task));
-      Navigator.pop(context);
-    }
+    context.read<TodoBloc>().add(MarkTaskEvent(task: widget.task));
+    Navigator.pop(context);
   }
 
   @override

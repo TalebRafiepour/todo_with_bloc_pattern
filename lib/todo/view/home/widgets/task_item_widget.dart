@@ -20,7 +20,8 @@ class TaskItemWidget extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
+          color:
+              task.isDone ? Colors.grey : Theme.of(context).colorScheme.surface,
           boxShadow: [BoxShadow(color: Colors.grey.shade300, blurRadius: 2.0)],
           borderRadius: BorderRadius.circular(10.0)),
       padding: const EdgeInsets.all(10.0),
@@ -33,7 +34,10 @@ class TaskItemWidget extends StatelessWidget {
           children: [
             Text(
               task.title,
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.headline6!.copyWith(
+                  decoration: task.isDone
+                      ? TextDecoration.lineThrough
+                      : TextDecoration.none),
             ),
             const Gap(10.0),
             Text(
