@@ -41,7 +41,6 @@ class _FilterWidgetState extends State<FilterWidget> {
                     setState(() {
                       _justShowDone = value!;
                     });
-                    debugPrint(state.options.toString());
                     if (state.options != null) {
                       context.read<TodoBloc>().add(FilterTasksEvent(
                           options: state.options!.copyWith(isDone: value)));
@@ -82,7 +81,6 @@ class _FilterWidgetState extends State<FilterWidget> {
                         setState(() {
                           _tag = tag;
                         });
-                        debugPrint(state.options.toString());
                         if (state.options != null) {
                           context.read<TodoBloc>().add(FilterTasksEvent(
                               options: state.options!.copyWith(tag: _tag)));

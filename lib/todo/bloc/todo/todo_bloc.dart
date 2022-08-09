@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:todo_with_bloc_pattern/todo/data/model/filter_options.dart';
@@ -64,7 +62,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> with HydratedMixin {
         List<ToDoTask> _tasks = state.tasks;
         _tasks.remove(event.task);
         emit(state.copyWith(tasks: _tasks));
-        
+
         // * To be able to change state of stuff that are inside filtered list!
         if (state.filteredTasks != null) {
           List<ToDoTask> _filteredTasks = state.filteredTasks!;
@@ -78,9 +76,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> with HydratedMixin {
     on<MarkTaskEvent>(
       (event, emit) {
         List<ToDoTask> _tasks = state.tasks;
-        // int _itemIndex = _tasks.indexOf(event.task);
-        int _itemIndex = _tasks
-            .indexOf(_tasks.where((element) => (element == event.task)).first);
+        int _itemIndex = _tasks.indexOf(event.task);
         _tasks[_itemIndex] =
             _tasks[_itemIndex].copyWith(isDone: !_tasks[_itemIndex].isDone);
         emit(state.copyWith(tasks: _tasks));
@@ -98,7 +94,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> with HydratedMixin {
     );
 
     on<FilterTasksEvent>(((event, emit) {
-      log(state.options.toString());
+      // log(state.options.toString());
       emit(state.copyWith(options: event.options));
 
       List<ToDoTask> _tasks = state.tasks;
@@ -106,15 +102,14 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> with HydratedMixin {
 
       // * Handling isDone
       if (event.options.isDone == true) {
-        _filteredTasks = _filteredTasks
-            .where((element) => (element.isDone == true))
-            .toList();
+        _filteredTasks =
+            _tasks.where((element) => (element.isDone == true)).toList();
       } else {
         _filteredTasks = _tasks;
       }
       // * Handling Tags
       if (event.options.tag != null) {
-        _filteredTasks = _tasks
+        _filteredTasks = _filteredTasks
             .where((element) => (element.tag == event.options.tag))
             .toList();
       }
