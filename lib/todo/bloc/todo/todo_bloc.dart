@@ -46,6 +46,15 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> with HydratedMixin {
           int _itemIndex = _tasks.indexOf(event.oldTask);
           _tasks[_itemIndex] = event.newTask;
           emit(state.copyWith(tasks: _tasks));
+
+          // * To be able to change state of stuff that are inside filtered list!
+          if (state.filteredTasks != null) {
+            List<ToDoTask> _filteredTasks = state.filteredTasks!;
+            if (_filteredTasks.contains(event.oldTask)) {
+              int _itemIndex = _filteredTasks.indexOf(event.oldTask);
+              _filteredTasks[_itemIndex] = event.newTask;
+            }
+          }
         }
       },
     );
@@ -55,6 +64,14 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> with HydratedMixin {
         List<ToDoTask> _tasks = state.tasks;
         _tasks.remove(event.task);
         emit(state.copyWith(tasks: _tasks));
+        
+        // * To be able to change state of stuff that are inside filtered list!
+        if (state.filteredTasks != null) {
+          List<ToDoTask> _filteredTasks = state.filteredTasks!;
+          if (_filteredTasks.contains(event.task)) {
+            _filteredTasks.remove(event.task);
+          }
+        }
       },
     );
 
@@ -67,6 +84,16 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> with HydratedMixin {
         _tasks[_itemIndex] =
             _tasks[_itemIndex].copyWith(isDone: !_tasks[_itemIndex].isDone);
         emit(state.copyWith(tasks: _tasks));
+
+        // * To be able to change state of stuff that are inside filtered list!
+        if (state.filteredTasks != null) {
+          List<ToDoTask> _filteredTasks = state.filteredTasks!;
+          if (_filteredTasks.contains(event.task)) {
+            int _itemIndex = _filteredTasks.indexOf(event.task);
+            _filteredTasks[_itemIndex] = _filteredTasks[_itemIndex]
+                .copyWith(isDone: !_filteredTasks[_itemIndex].isDone);
+          }
+        }
       },
     );
 
