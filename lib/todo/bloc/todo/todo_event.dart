@@ -8,3 +8,5 @@ class AddTodoItemEvent extends TodoEvent {
 
   AddTodoItemEvent({required this.task});
 }
+
+class RemoveAllTasksEvent extends TodoEvent {}

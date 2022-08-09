@@ -3,14 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../bloc/todo/todo_bloc.dart';
 import '../../../bloc/todo/todo_state.dart';
-import '../../../data/model/todo_task.dart';
 import 'task_item_widget.dart';
 
 class TaskListViewWidget extends StatelessWidget {
   const TaskListViewWidget({
     Key? key,
   }) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {

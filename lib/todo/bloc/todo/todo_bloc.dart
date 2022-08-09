@@ -25,5 +25,11 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> with HydratedMixin {
         emit(state.copyWith(tasks: _tasks));
       },
     );
+
+    on<RemoveAllTasksEvent>(
+      (event, emit) {
+        emit(state.copyWith(tasks: []));
+      },
+    );
   }
 }

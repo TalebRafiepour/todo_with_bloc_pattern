@@ -14,6 +14,7 @@ class AddTaskButtonWidget extends StatelessWidget {
 
     return FloatingActionButton(
       onPressed: _addTaskMethod,
+      heroTag: "btn1",
       child: const Icon(Icons.add_rounded),
     );
   }
