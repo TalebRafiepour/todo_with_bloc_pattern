@@ -53,17 +53,20 @@ class ToDoTask extends Equatable {
       'description': description,
       'tag': tag?.toMap(),
       'isDone': isDone,
+      'time': time?.millisecondsSinceEpoch,
     };
   }
 
   factory ToDoTask.fromMap(Map<String, dynamic> map) {
     return ToDoTask(
-      title: map['title'] as String,
-      description:
-          map['description'] != null ? map['description'] as String : null,
-      tag: map['tag'] != null ? enumFromMap(map['tag'] as String) : null,
-      isDone: map['isDone'] as bool,
-    );
+        title: map['title'] as String,
+        description:
+            map['description'] != null ? map['description'] as String : null,
+        tag: map['tag'] != null ? enumFromMap(map['tag'] as String) : null,
+        isDone: map['isDone'] as bool,
+        time: map['time'] != null
+            ? DateTime.fromMillisecondsSinceEpoch(map['time'] as int)
+            : null);
   }
 
   String toJson() => json.encode(toMap());

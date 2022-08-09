@@ -32,3 +32,10 @@ class MarkTaskEvent extends TodoEvent {
 
   MarkTaskEvent({required this.task});
 }
+
+class FilterTasksEvent extends TodoEvent {
+  final FilterOptions options;
+
+  FilterTasksEvent({required this.options});
+}
+class RemoveFiltersEvent extends TodoEvent {}

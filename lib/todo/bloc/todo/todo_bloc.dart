@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:todo_with_bloc_pattern/todo/data/model/filter_options.dart';
 
 import '../../data/model/todo_task.dart';
 import 'todo_state.dart';
@@ -17,7 +20,11 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> with HydratedMixin {
     return state.toMap();
   }
 
-  TodoBloc() : super(TodoState(tasks: [])) {
+  TodoBloc()
+      : super(TodoState(
+            tasks: [],
+            filteredTasks: null,
+            options: FilterOptions(isDone: false, tag: null))) {
     on<AddTodoItemEvent>(
       (event, emit) {
         List<ToDoTask> _tasks = state.tasks;
@@ -28,7 +35,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> with HydratedMixin {
 
     on<RemoveAllTasksEvent>(
       (event, emit) {
-        emit(state.copyWith(tasks: []));
+        emit(state.copyWithThatMakesFilteredResultsNull(tasks: []));
       },
     );
 
@@ -60,6 +67,38 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> with HydratedMixin {
         _tasks[_itemIndex] =
             _tasks[_itemIndex].copyWith(isDone: !_tasks[_itemIndex].isDone);
         emit(state.copyWith(tasks: _tasks));
+      },
+    );
+
+    on<FilterTasksEvent>(((event, emit) {
+      log(state.options.toString());
+      emit(state.copyWith(options: event.options));
+
+      List<ToDoTask> _tasks = state.tasks;
+      List<ToDoTask> _filteredTasks = _tasks;
+
+      // * Handling isDone
+      if (event.options.isDone == true) {
+        _filteredTasks = _filteredTasks
+            .where((element) => (element.isDone == true))
+            .toList();
+      } else {
+        _filteredTasks = _tasks;
+      }
+      // * Handling Tags
+      if (event.options.tag != null) {
+        _filteredTasks = _tasks
+            .where((element) => (element.tag == event.options.tag))
+            .toList();
+      }
+
+      emit(state.copyWith(filteredTasks: _filteredTasks));
+    }));
+
+    on<RemoveFiltersEvent>(
+      (event, emit) {
+        emit(state.copyWithThatMakesFilteredResultsNull(
+            options: FilterOptions(tag: null, isDone: false)));
       },
     );
   }

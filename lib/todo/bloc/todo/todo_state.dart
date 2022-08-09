@@ -1,12 +1,17 @@
 import 'dart:convert';
 
+import '../../data/model/filter_options.dart';
 import '../../data/model/todo_task.dart';
 
 class TodoState {
   List<ToDoTask> tasks;
+  List<ToDoTask>? filteredTasks;
+  FilterOptions? options;
 
   TodoState({
     required this.tasks,
+    this.filteredTasks,
+    this.options,
   });
 
   Map<String, dynamic> toMap() {
@@ -32,12 +37,28 @@ class TodoState {
 
   TodoState copyWith({
     List<ToDoTask>? tasks,
+    List<ToDoTask>? filteredTasks,
+    FilterOptions? options,
   }) {
     return TodoState(
       tasks: tasks ?? this.tasks,
+      filteredTasks: filteredTasks ?? this.filteredTasks,
+      options: options ?? this.options,
+    );
+  }
+
+  TodoState copyWithThatMakesFilteredResultsNull({
+    List<ToDoTask>? tasks,
+    FilterOptions? options,
+  }) {
+    return TodoState(
+      tasks: tasks ?? this.tasks,
+      filteredTasks: null,
+      options: options ?? this.options,
     );
   }
 
   @override
-  String toString() => 'TodoState(tasks: $tasks)';
+  String toString() =>
+      'TodoState(tasks: $tasks, filteredTasks: $filteredTasks)';
 }

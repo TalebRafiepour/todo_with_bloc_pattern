@@ -25,9 +25,14 @@ class TaskListViewWidget extends StatelessWidget {
             ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: state.tasks.length,
+                itemCount: state.filteredTasks != null
+                    ? state.filteredTasks!.length
+                    : state.tasks.length,
                 itemBuilder: (context, index) {
-                  return TaskItemWidget(task: state.tasks[index]);
+                  return TaskItemWidget(
+                      task: state.filteredTasks != null
+                          ? state.filteredTasks![index]
+                          : state.tasks[index]);
                 }),
           ],
         );
