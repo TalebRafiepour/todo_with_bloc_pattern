@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_with_bloc_pattern/foundation/constants/routes.dart';
 
 class AddTaskButtonWidget extends StatelessWidget {
   const AddTaskButtonWidget({
@@ -7,8 +8,12 @@ class AddTaskButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _addTaskMethod() {
+      Navigator.pushNamed(context, ToDoRoutes.addTaskScreen);
+    }
+
     return FloatingActionButton(
-      onPressed: () {},
+      onPressed: _addTaskMethod,
       child: const Icon(Icons.add_rounded),
     );
   }
