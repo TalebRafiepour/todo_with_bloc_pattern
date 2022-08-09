@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import '../../data/model/todo_task.dart';
+import '../../../data/model/todo_task.dart';
 
 class TaskItemWidget extends StatelessWidget {
   const TaskItemWidget({

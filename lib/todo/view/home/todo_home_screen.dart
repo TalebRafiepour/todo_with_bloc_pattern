@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:todo_with_bloc_pattern/todo/view/widgets/add_task_button.dart';
 
-import '../data/model/todo_task.dart';
+import '../../data/model/todo_task.dart';
+
+import 'widgets/add_task_button.dart';
 import 'widgets/task_listview_widget.dart';
 import 'widgets/todo_appbar_widget.dart';
 

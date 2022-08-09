@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_with_bloc_pattern/todo/view/todo_home_screen.dart';
+import 'package:todo_with_bloc_pattern/todo/view/home/todo_home_screen.dart';
 
 import 'constants/routes.dart';
 
