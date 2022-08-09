@@ -14,7 +14,12 @@ class HomeAppbarWidget extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<TodoBloc, TodoState>(
       builder: (context, state) {
-        return ToDoAppBarWidget(title: 'ToDo App (${state.tasks.length})');
+        int _remainingTasksCount = state.tasks
+            .where((element) => element.isDone == false)
+            .toList()
+            .length;
+        return ToDoAppBarWidget(
+            title: 'ToDo App ($_remainingTasksCount pending!)');
       },
     );
   }
