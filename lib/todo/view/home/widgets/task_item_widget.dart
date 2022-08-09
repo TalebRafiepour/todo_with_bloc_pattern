@@ -20,8 +20,9 @@ class TaskItemWidget extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-          color:
-              task.isDone ? Colors.grey : Theme.of(context).colorScheme.surface,
+          color: task.isDone
+              ? Colors.grey.shade300
+              : Theme.of(context).colorScheme.surface,
           boxShadow: [BoxShadow(color: Colors.grey.shade300, blurRadius: 2.0)],
           borderRadius: BorderRadius.circular(10.0)),
       padding: const EdgeInsets.all(10.0),
