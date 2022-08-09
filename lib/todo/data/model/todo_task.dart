@@ -9,8 +9,8 @@ class ToDoTask extends Equatable {
 
   const ToDoTask({
     required this.title,
-    required this.description,
-    required this.tag,
+    this.description,
+    this.tag,
   });
 
   static List<ToDoTask> getMockTasks() {
