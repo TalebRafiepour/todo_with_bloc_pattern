@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_with_bloc_pattern/todo/view/widgets/add_task_button.dart';
 
 import '../data/model/todo_task.dart';
 import 'widgets/task_listview_widget.dart';
@@ -17,6 +18,7 @@ class _ToDoHomeScreenState extends State<ToDoHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const ToDoAppBarWidget(),
+      floatingActionButton: const AddTaskButtonWidget(),
       body: SingleChildScrollView(
           child: Column(
         children: [
