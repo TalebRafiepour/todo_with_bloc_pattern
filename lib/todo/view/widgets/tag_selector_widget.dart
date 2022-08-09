@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../data/model/enums/task_tag.dart';
+import '../../data/model/enums/task_tag.dart';
 
 
 class TagSelectorWidget extends StatefulWidget {

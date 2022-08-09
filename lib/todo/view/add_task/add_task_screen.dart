@@ -7,7 +7,7 @@ import '../../bloc/todo/todo_bloc.dart';
 import '../../data/model/enums/task_tag.dart';
 import '../../data/model/todo_task.dart';
 import '../widgets/todo_appbar_widget.dart';
-import 'widgets/tag_selector_widget.dart';
+import '../widgets/tag_selector_widget.dart';
 
 class AddTaskScreen extends StatefulWidget {
   const AddTaskScreen({Key? key}) : super(key: key);

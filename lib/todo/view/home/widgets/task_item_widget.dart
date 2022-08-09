@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
+import '../../../../foundation/constants/routes.dart';
 import '../../../data/model/todo_task.dart';
 
 class TaskItemWidget extends StatelessWidget {
@@ -13,6 +14,10 @@ class TaskItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _editTaskMethod() {
+      Navigator.pushNamed(context, ToDoRoutes.editTaskScreen, arguments: task);
+    }
+
     return Container(
       decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surface,
@@ -21,7 +26,7 @@ class TaskItemWidget extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       margin: const EdgeInsets.all(10.0),
       child: InkWell(
-        onTap: () {},
+        onTap: _editTaskMethod,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
